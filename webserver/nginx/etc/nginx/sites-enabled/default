@@ -32,8 +32,8 @@ server{
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     access_log      /var/log/nginx/learning.access.log;
     error_log       /var/log/nginx/learning.error.log;
-    #ssl_certificate      /etc/ssl/learning/learning.crt;
-    #ssl_certificate_key  /etc/ssl/learning/learning.key;
+    ssl_certificate      /etc/ssl/learning/learning.crt;
+    ssl_certificate_key  /etc/ssl/learning/learning.key;
     add_header           Front-End-Https    on;
     keepalive_timeout    70;
     root /home/ubuntu/;
