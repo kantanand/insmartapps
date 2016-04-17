@@ -1,0 +1,4 @@
+*.komodoproject
+*.sublime-workspace
+**/bin
+*****/bin
