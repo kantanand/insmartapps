@@ -6,7 +6,7 @@ from fabric.contrib.project import rsync_project
 from fabric.contrib.files import sed
 
 env.learning_root = '/home/ubuntu/learning'
-env.nfdb_root = '/home/ubuntu/nfdb'
+env.learning_root = '/home/ubuntu/learning'
 host_name = ""
 db_host_name = "localhost"
 if len(env.hosts) > 0:
@@ -72,10 +72,10 @@ def force_restart():
 @task
 def setupdb():
     run('mkdir -p /tmp/learning')
-    put('database/nfdb.sql', '/tmp/learning')
-    run('mysql -prootusk -uroot < /tmp/learning/nfdb.sql')
+    put('database/learning.sql', '/tmp/learning')
+    run('mysql -prootusk -uroot < /tmp/learning/learning.sql')
 
-# sync all learning and nfdb django files
+# sync all learning and learning django files
 @task
 def cp():
     print('copying learning source')
@@ -100,10 +100,10 @@ def static():
     with cd(env.learning_root):
         run('/home/ubuntu/env/bin/python manage.py collectstatic -v0 --noinput --settings=learning.settings-production')
 
-# update datacenter app nfdb -> learning
+# update datacenter app learning -> learning
 @task
 def update_datacenter():
-    run("rsync --exclude '*.pyc' -avz /home/ubuntu/nfdb/datacenter/* /home/ubuntu/learning/datacenter/")
+    run("rsync --exclude '*.pyc' -avz /home/ubuntu/learning/datacenter/* /home/ubuntu/learning/datacenter/")
     run('grep -rl "managed = True" /home/ubuntu/learning/datacenter/models/ | xargs sed -i "s/managed = True/managed = False/g";')
 
 # sync all db
