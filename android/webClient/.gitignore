@@ -1,3 +1,4 @@
 *.komodoproject
 *.sublime-workspace
 */bin
+*/gen
