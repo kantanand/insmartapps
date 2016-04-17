@@ -1,8 +1,8 @@
 server {
     listen 80 default_server;
     server_name [SERVER_NAME];
-    access_log      /var/log/nginx/nf.access.log;
-    error_log       /var/log/nginx/nf.error.log;
+    access_log      /var/log/nginx/learning.access.log;
+    error_log       /var/log/nginx/learning.error.log;
     keepalive_timeout    70;
     root /home/ubuntu/;
 
@@ -30,10 +30,10 @@ server{
     client_max_body_size 50M;
     ssl on;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    access_log      /var/log/nginx/nf.access.log;
-    error_log       /var/log/nginx/nf.error.log;
-    ssl_certificate      /etc/ssl/nf/nf.crt;
-    ssl_certificate_key  /etc/ssl/nf/nf.key;
+    access_log      /var/log/nginx/learning.access.log;
+    error_log       /var/log/nginx/learning.error.log;
+    #ssl_certificate      /etc/ssl/learning/learning.crt;
+    #ssl_certificate_key  /etc/ssl/learning/learning.key;
     add_header           Front-End-Https    on;
     keepalive_timeout    70;
     root /home/ubuntu/;
