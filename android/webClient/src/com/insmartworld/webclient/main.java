@@ -27,18 +27,18 @@ public class main extends Activity
         settings.setAllowFileAccessFromFileURLs(true);
         settings.setAllowUniversalAccessFromFileURLs(true);
         settings.setBuiltInZoomControls(true);
-        String StaticIP = "insmartworld.com";
+        String StaticIP = "insmartapps.com";
         final Activity activity = this;
-                
+
         webView.setWebViewClient(new WebViewClient() {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 Toast.makeText(activity, description, Toast.LENGTH_SHORT).show();
             }
         });
-        webView.setWebViewClient( new SSLTolerentWebViewClient() ); 
+        webView.setWebViewClient( new SSLTolerentWebViewClient() );
         webView.loadUrl("http://"+StaticIP+"/");
         //setContentView(R.layout.main);
-    } 
+    }
 
     // SSL Error Tolerant Web View Client
     private class SSLTolerentWebViewClient extends WebViewClient {
