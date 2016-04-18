@@ -194,19 +194,29 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
-# STATIC_URL = '/static/'
-STATIC_ROOT = "/home/ubuntu/learning/static"
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.8/howto/static-files/
+
+STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
+STATIC_ROOT = "/home/ubuntu/static"
+LOADING_STATIC_FOR_PDF = os.path.join(BASE_DIR, "static")
+
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
-LOADING_STATIC_FOR_PDF = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = "/home/ubuntu/media"
 
 # Mail Settings
 
