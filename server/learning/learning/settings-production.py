@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'zt@47tdisep-+8x4e88+(z8(r%ms!+2!#kw%s9%9l&^)2i&p^#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False#True
 
 ALLOWED_HOSTS = []
 
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'datacenter',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -74,10 +75,18 @@ WSGI_APPLICATION = 'learning.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
+database_host = "[DB_HOST_NAME]"
+if "DB_HOST_NAME" in database_host:
+    database_host = "localhost"
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "learndb",
+        "USER": "admin",
+        "PASSWORD": "admin@123#",
+        "HOST": database_host,
+        "PORT": "3306",
     }
 }
 
