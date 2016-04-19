@@ -5,7 +5,7 @@ from fabric.tasks import execute
 from fabric.contrib.project import rsync_project
 from fabric.utils import warn
 import learningfabfile as learning
-
+#false
 def apt_update():
 	sudo('apt-get update')
 
