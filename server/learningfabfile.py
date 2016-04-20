@@ -100,20 +100,14 @@ def static():
     with cd(env.learning_root):
         run('/home/ubuntu/env/bin/python manage.py collectstatic -v0 --noinput --settings=learning.settings-production')
 
-# update datacenter app learning -> learning
-@task
-def update_datacenter():
-    run("rsync --exclude '*.pyc' -avz /home/ubuntu/learning/datacenter/* /home/ubuntu/learning/datacenter/")
-    run('grep -rl "managed = True" /home/ubuntu/learning/datacenter/models/ | xargs sed -i "s/managed = True/managed = False/g";')
-
 # sync all db
 @task
 def dbsync():
     with cd(env.learning_root):
         if host_name == 'insmartapps.com':
-            run('/home/ubuntu/env/bin/python manage.py makemigrations')
             run('/home/ubuntu/env/bin/python manage.py migrate')
         else:
+            run('/home/ubuntu/env/bin/python manage.py makemigrations')
             run('/home/ubuntu/env/bin/python manage.py migrate')
 
 # create super user
@@ -145,7 +139,6 @@ def setup():
     execute(nginx)
     execute(setupdb)
     execute(cp)
-    execute(update_datacenter)
     execute(dbsync)
     execute(static)
     execute(create_super_user)
@@ -158,7 +151,6 @@ def setup():
 @task
 def deploy():
     execute(cp)
-    execute(update_datacenter)
     execute(dbsync)
     execute(static)
 
