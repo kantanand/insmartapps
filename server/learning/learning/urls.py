@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 
-from login.views import user_logout
+from login.views import logout_user
 
 urlpatterns = patterns('',
     # Home Page
@@ -25,7 +25,7 @@ urlpatterns = patterns('',
     url(r'^admin/', admin.site.urls),
     # login --- urls
     url(r'^login/', include('login.urls')),
-    url(r'^logout/', user_logout, name='logout'),
+    url(r'^logout/', logout_user, name='logout'),
     # signup --- urls
     url(r'^signup/', include('signup.urls', namespace='signup')),
 )
