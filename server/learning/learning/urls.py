@@ -20,7 +20,7 @@ from login.views import logout_user
 
 urlpatterns = patterns('',
     # Home Page
-    url(r'^$', home, name='home'),
+    # url(r'^$', home, name='home'),
     # admin --- urls
     url(r'^admin/', admin.site.urls),
     # login --- urls
