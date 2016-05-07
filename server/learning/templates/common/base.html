@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>
+        {% block page-title %}
+            {{ settings.PRODUCT_NAME | default:'Learning' }}
+        {% endblock %}
+    </title>
+    {% block base-css %}
+    {% endblock %}
+    {% block css-files %}
+    {% endblock %}
+</head>
+<body>
+    <!-- NarBar Start -->
+    {% block base-nav-bar %}
+    {% endblock %}
+    <!-- NarBar Ended -->
+    {% block main-body %}
+    {% endblock %}
+
+<!-- Add Scripts Here -->
+{% block base-scripts %}
+{% endblock %}
+{% block scripts-files %}
+{% endblock %}
+</body>
+</html>
