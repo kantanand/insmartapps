@@ -27,7 +27,7 @@ class UserProfile(models.Model):
     date_of_birth = models.DateField(blank=True, null=True)
     father_name  = models.CharField(max_length=50, blank=True)
     mother_name  = models.CharField(max_length=50, blank=True)
-    primary_email = models.CharField(max_length=250)
+    user_email = models.CharField(max_length=250)
     secondary_email = models.CharField(max_length=250, blank=True)
     primary_mobile      = models.CharField(max_length=20)
     secondary_mobile = models.CharField(max_length=20, blank=True)
@@ -72,7 +72,7 @@ class UserProfile(models.Model):
 
     def create_user_profile(sender, instance, created, **kwargs):
         if created:
-            UserProfile.objects.create(user=instance,email=instance.username)
+            UserProfile.objects.create(user=instance,user_email=instance.username)
     post_save.connect(create_user_profile, sender=User)
 
 User.profile = property(lambda u: UserProfile.objects.get_or_create(user=u)[0])
