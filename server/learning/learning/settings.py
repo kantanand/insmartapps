@@ -123,6 +123,7 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.messages.context_processors.messages',
+                'common.context_processors.general_settings',
             ],
             'loaders': [
                 'app_namespace.Loader',
