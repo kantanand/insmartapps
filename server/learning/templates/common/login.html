@@ -3,6 +3,10 @@
     <title></title>
 </head>
 <body>
-    {{ form }}
+    <form action="{{LOGIN_URL}}" method="POST" accept-charset="utf-8">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Login</button>
+    </form>
 </body>
 </html>
