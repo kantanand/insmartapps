@@ -3,7 +3,7 @@ USER="ubuntu"
 PIDFILE="/home/ubuntu/learning/learning-uwsgi.pid"
 
 function start(){
-    su - ${USER} /bin/sh -c "source /home/ubuntu/nfenv/bin/activate && exec uwsgi --pidfile=${PIDFILE} --master --ini /etc/init.d/learning-uwsgi.ini"
+    su - ${USER} /bin/sh -c "source /home/ubuntu/env/bin/activate && exec uwsgi --pidfile=${PIDFILE} --master --ini /etc/init.d/learning-uwsgi.ini"
 }
 
 function stop(){
