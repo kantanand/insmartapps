@@ -1,12 +1,10 @@
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+{% block main-body %}
     <form action="{{LOGIN_URL}}" method="POST" accept-charset="utf-8">
         {% csrf_token %}
         {{ form }}
         <button type="submit">Login</button>
     </form>
-</body>
-</html>
+{% endblock %}

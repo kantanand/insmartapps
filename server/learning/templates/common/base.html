@@ -7,7 +7,13 @@
     </title>
     {% block base-css %}
     {% endblock %}
+    {% block important-css %}
+    {% endblock %}
     {% block css-files %}
+    {% endblock %}
+    {% block base-scripts %}
+    {% endblock %}
+    {% block important-scripts %}
     {% endblock %}
 </head>
 <body>
@@ -19,8 +25,6 @@
     {% endblock %}
 
 <!-- Add Scripts Here -->
-{% block base-scripts %}
-{% endblock %}
 {% block scripts-files %}
 {% endblock %}
 </body>

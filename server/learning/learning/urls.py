@@ -31,6 +31,9 @@ urlpatterns = patterns('',
     # signup --- urls
     url(r'^signup/', include('signup.urls', namespace='signup')),
 
+    # member --- urls
+    url(r'^member/', include('member.urls', namespace='member')),
+
     # admin --- urls
     url(r'^admin/', admin.site.urls),
 
