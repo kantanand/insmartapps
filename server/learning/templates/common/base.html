@@ -1,17 +1,29 @@
-<html>
+<!DOCTYPE html>
+{% load i18n admin_static %}
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:'en-us' }}">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-        {% block page-title %}
-            {{ settings.PRODUCT_NAME | default:'Learning' }}
-        {% endblock %}
+        {{ PAGE_TITLE }}
     </title>
     {% block base-css %}
+    <!-- Base CSS Block -->
+    <!-- Bootstrap css -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     {% endblock %}
     {% block important-css %}
     {% endblock %}
     {% block css-files %}
     {% endblock %}
     {% block base-scripts %}
+    <!-- Base Scripts -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <!-- Bootstrap js -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% endblock %}
     {% block important-scripts %}
     {% endblock %}
