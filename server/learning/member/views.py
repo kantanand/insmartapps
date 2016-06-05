@@ -11,4 +11,5 @@ from common.decorators import check_role_and_redirect
 def index(request):
     current_time = datetime.datetime.now()
     PAGE_TITLE = "Student Dashboard"
+    LOGOUT_URL = settings.LOGOUT_URL
     return render(request,'member/dashboard.html',locals())
