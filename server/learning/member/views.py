@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
@@ -8,4 +9,6 @@ from common.decorators import check_role_and_redirect
 
 # Create your views here.
 def index(request):
-    return HttpResponse('member index file')
+    current_time = datetime.datetime.now()
+    PAGE_TITLE = "Student Dashboard"
+    return render(request,'member/dashboard.html',locals())

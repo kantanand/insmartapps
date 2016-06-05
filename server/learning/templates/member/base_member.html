@@ -1,0 +1,7 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+{% block main-body %}
+    Welcome {{ user.profile.first_name }} {{ user.profile.last_name }}
+    Time: {{ current_time }}
+{% endblock %}
