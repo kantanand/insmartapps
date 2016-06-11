@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import LoginForm
 
-from common.decorators import check_role_and_redirect
+import common.decorators
 
 # Create your views here.
 def index(request):
