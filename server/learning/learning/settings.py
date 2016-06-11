@@ -152,6 +152,9 @@ DATABASES = {
         "PASSWORD": "admin@123#",
         "HOST": database_host,
         "PORT": "3306",
+        'TEST': {
+            'NAME': 'test_learndb',
+        },
     }
 }
 
