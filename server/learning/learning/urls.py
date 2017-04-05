@@ -27,7 +27,8 @@ urlpatterns = patterns('',
     # login --- urls
     url(r'^login/', include('login.urls')),
     url(r'^logout/', logout_user, name='logout'),
-
+    # API: login get-auth token()
+    url(r'^api/',include('login.api_urls', namespace='api_login')),
     # signup --- urls
     url(r'^signup/', include('signup.urls', namespace='signup')),
 
@@ -36,6 +37,7 @@ urlpatterns = patterns('',
 
     # admin --- urls
     url(r'^admin/', admin.site.urls),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 
     # Media URLS
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
