@@ -27,7 +27,7 @@ public class main extends Activity
         settings.setAllowFileAccessFromFileURLs(true);
         settings.setAllowUniversalAccessFromFileURLs(true);
         settings.setBuiltInZoomControls(true);
-        String StaticIP = "insmartapps.com";
+        String StaticIP = "insmartworld.com";
         final Activity activity = this;
 
         webView.setWebViewClient(new WebViewClient() {
@@ -36,7 +36,7 @@ public class main extends Activity
             }
         });
         webView.setWebViewClient( new SSLTolerentWebViewClient() );
-        webView.loadUrl("http://"+StaticIP+"/");
+        webView.loadUrl("https://"+StaticIP+"/");
         //setContentView(R.layout.main);
     }
 
