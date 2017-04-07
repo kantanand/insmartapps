@@ -8,9 +8,15 @@ from fabric.contrib.files import sed
 env.learning_root = '/home/ubuntu/learning'
 env.learning_root = '/home/ubuntu/learning'
 host_name = ""
+domain_name = ""
 db_host_name = "localhost"
 if len(env.hosts) > 0:
     host_name = env.hosts[0].split('@')[-1]
+    domain_name = host_name
+
+if 'domain_name' in env:
+    domain_name = env.domain_name
+    host_name = domain_name
 
 # Check Server and Set DB Connection
 if host_name == 'insmartapps.com':
@@ -163,4 +169,6 @@ def clean_deploy():
     execute(create_super_user)
     execute(force_restart)
 
-
+@task
+def check_domain():
+    print domain_name
