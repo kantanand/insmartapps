@@ -5,6 +5,6 @@
     <form action="{{LOGIN_URL}}" method="POST" accept-charset="utf-8">
         {% csrf_token %}
         {{ form }}
-        <button type="submit">Login</button>
+        <button type="submit" name="login">Login</button>
     </form>
 {% endblock %}
