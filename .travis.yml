@@ -23,8 +23,8 @@ before_script:
 - mysql -e 'drop database if exists test_learndb;' -u root
 - mysql -e 'create database learndb CHARACTER SET utf8 COLLATE utf8_general_ci;' -u root
 - mysql -e 'create database test_learndb CHARACTER SET utf8 COLLATE utf8_general_ci;' -u root
-- mysql -e 'grant all on learndb.* to 'admin'@'localhost' identified by 'admin@123#';' -u root
-- mysql -e 'grant all on test_learndb.* to 'admin'@'localhost' identified by 'admin@123#';' -u root
+# - mysql -e 'grant all on learndb.* to 'admin'@'localhost' identified by 'admin@123#';' -u root
+# - mysql -e 'grant all on test_learndb.* to 'admin'@'localhost' identified by 'admin@123#';' -u root
 
 script:
 - echo "Thanks"
