@@ -28,6 +28,10 @@ def install_mysql():
     apt_get_install('mysql-server')
 
 @task
+def install_nginx():
+    apt_get_install('nginx')
+
+@task
 def env():
     print('creating env')
     run('virtualenv env')
@@ -36,11 +40,25 @@ def env():
 @task
 def dependencies():
     apt_update()
-    apt_get_install('build-essential', 'autoconf', 'libtool', 'pkg-config', 'nginx', 'rsync',
-        'libffi-dev', 'libssl-dev', 'libmysqlclient-dev', 'python-virtualenv', 'python-dev', 'binutils', 'libproj-dev', 'gdal-bin')
+    apt_get_install(
+        'build-essential', 
+        'autoconf',
+        'libtool', 
+        'pkg-config', 
+        'rsync',
+        'libffi-dev', 
+        'libssl-dev', 
+        'libmysqlclient-dev', 
+        'python-virtualenv', 
+        'python-dev', 
+        'binutils', 
+        'libproj-dev', 
+        'gdal-bin'
+        )
 
 @task
 def newsetup():
     execute(dependencies)
-    execute(env)
     execute(install_mysql)
+    execute(install_nginx)
+    execute(env)

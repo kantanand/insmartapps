@@ -61,40 +61,6 @@ LOCAL_APPS = (
 )
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + LOCAL_APPS
-EMAIL_BACKEND = 'django_mandrill.mail.backends.mandrillbackend.EmailBackend'
-MANDRILL_API_KEY = "S7LYcVWRNKR70qgReZDXPw"
-
-## Applications Settings CKEditor
-CKEDITOR_UPLOAD_PATH = "uploads/"
-CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
-CKEDITOR_RESTRICT_BY_USER = True # Setting to True will restricts access to uploaded images to the uploading user (e.g. each user only sees and uploads their own images).
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'Custom',
-        'toolbar_Custom': [
-            ['Format'],
-            ['Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker','Undo', 'Redo'],
-            ['NumberedList', 'BulletedList', 'Indent', 'Outdent', 'JustifyLeft', 'JustifyCenter','JustifyRight', 'JustifyBlock'],
-            ['Image', 'Table', 'Link', 'Unlink', 'SectionLink', 'Subscript', 'Superscript'],
-            ['Smiley','SpecialChar'],
-        ]
-    },
-    'blog_toolbar':{
-        'width': '765',
-        'removePlugins': 'elementspath',
-        'toolbar': 'BlogToolBar',
-        'toolbar_BlogToolBar': [
-            ['Format'],
-            ['Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker','Undo', 'Redo'],
-            ['NumberedList', 'BulletedList', 'Indent', 'Outdent', 'JustifyLeft', 'JustifyCenter','JustifyRight', 'JustifyBlock'],
-            ['Image', 'Table', 'Link', 'Unlink', 'SectionLink', 'Subscript', 'Superscript'],
-            ['Smiley','SpecialChar'],
-        ]
-    },
-    'awesome_ckeditor': {
-        'toolbar': 'Basic',
-    },
-}
 
 MIDDLEWARE_CLASSES = [
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -149,27 +115,7 @@ REST_FRAMEWORK = {
 
 WSGI_APPLICATION = 'learning.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/dev/ref/settings/#databases
-
-database_host = "[DB_HOST_NAME]"
-if "DB_HOST_NAME" in database_host:
-    database_host = "localhost"
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": "learndb",
-        "USER": "admin",
-        "PASSWORD": "admin@123#",
-        "HOST": database_host,
-        "PORT": "3306",
-        'TEST': {
-            'NAME': 'test_learndb',
-        },
-    }
-}
+AUTH_PROFILE_MODULE = 'datacenter.UserProfile'
 
 
 # Password validation
@@ -205,6 +151,38 @@ USE_L10N = True
 USE_TZ = True
 
 
+## Applications Settings CKEditor
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_JQUERY_URL = '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'
+CKEDITOR_RESTRICT_BY_USER = True # Setting to True will restricts access to uploaded images to the uploading user (e.g. each user only sees and uploads their own images).
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Format'],
+            ['Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker','Undo', 'Redo'],
+            ['NumberedList', 'BulletedList', 'Indent', 'Outdent', 'JustifyLeft', 'JustifyCenter','JustifyRight', 'JustifyBlock'],
+            ['Image', 'Table', 'Link', 'Unlink', 'SectionLink', 'Subscript', 'Superscript'],
+            ['Smiley','SpecialChar'],
+        ]
+    },
+    'blog_toolbar':{
+        'width': '765',
+        'removePlugins': 'elementspath',
+        'toolbar': 'BlogToolBar',
+        'toolbar_BlogToolBar': [
+            ['Format'],
+            ['Bold', 'Italic', 'Underline', 'Strike', 'SpellChecker','Undo', 'Redo'],
+            ['NumberedList', 'BulletedList', 'Indent', 'Outdent', 'JustifyLeft', 'JustifyCenter','JustifyRight', 'JustifyBlock'],
+            ['Image', 'Table', 'Link', 'Unlink', 'SectionLink', 'Subscript', 'Superscript'],
+            ['Smiley','SpecialChar'],
+        ]
+    },
+    'awesome_ckeditor': {
+        'toolbar': 'Basic',
+    },
+}
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
@@ -219,24 +197,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'uploads')
 LOADING_STATIC_FOR_PDF = os.path.join(BASE_DIR, "static")
 
-# Mail Settings
-
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'insmartapps.in@gmail.com'
-EMAIL_HOST_PASSWORD = 'insmartapps@vol'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
-## GLOBAL CONSTANTS ##
-host_name = "[SERVER_NAME]"
-if "[SERVER_NAME]" in host_name:
-    host_name = "0.0.0.0"
-DEFAULT_HOST = host_name
-DEFAULT_PORT = "8000"
-DEFAULT_DOMAIN_NAME = DEFAULT_HOST+':'+DEFAULT_PORT
-PRODUCT_NAME = 'Learning App'
-
-AUTH_PROFILE_MODULE = 'datacenter.UserProfile'
 LOGO = '/static/admin_theme/images/logo1.png'
 ## Login - Auth URL's ##
 
@@ -250,3 +210,35 @@ LOGIN_EXEMPT_URLS = (
     r'api-auth/*',
     r'api/*',
 )
+
+# Database
+# https://docs.djangoproject.com/en/dev/ref/settings/#databases
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": os.environ.get("DB_NAME","learndb"),
+        "USER": os.environ.get("DB_USER_NAME","admin"),
+        "PASSWORD": os.environ.get("DB_USER_PASS","admin@123#"),
+        "HOST": os.environ.get("DB_HOST","localhost"),
+        "PORT": os.environ.get("DB_PORT","3306"),
+        'TEST': {
+            'NAME': 'test_learndb',
+        },
+    }
+}
+
+# Mail Settings
+EMAIL_BACKEND = 'django_mandrill.mail.backends.mandrillbackend.EmailBackend'
+MANDRILL_API_KEY = os.environ.get("MANDRILL_API_KEY","S7LYcVWRNKR70qgReZDXPw")
+EMAIL_HOST = os.environ.get('EMAIL_HOST','smtp.gmail.com')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER','insmartapps.in@gmail.com')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD','insmartapps@vol')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+EMAIL_USE_TLS = True
+
+## GLOBAL CONSTANTS ##
+host_name = "[SERVER_NAME]"
+DEFAULT_HOST = os.environ.get("DEFAULT_HOST","localhost")
+DEFAULT_PORT = os.environ.get("DEFAULT_PORT","8000")
+DEFAULT_DOMAIN_NAME = DEFAULT_HOST+':'+DEFAULT_PORT
+PRODUCT_NAME = os.environ.get("PRODUCT_NAME",'Learning App')
