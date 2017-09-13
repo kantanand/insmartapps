@@ -6,7 +6,7 @@ from fabric.contrib.project import rsync_project
 from fabric.contrib.files import sed
 
 env.learning_root = '/home/ubuntu/learning'
-env.learning_root = '/home/ubuntu/learning'
+
 host_name = ""
 domain_name = ""
 db_host_name = "localhost"
@@ -86,14 +86,22 @@ def setupdb():
 def cp():
     print('copying learning source')
     rsync_project('/home/ubuntu', 'learning')
+
+@task
+def set_config_values():
+    """
+    used to set the config values 
+    """
     sed('/home/ubuntu/learning/learning/settings-production.py',
         "\[SERVER_NAME\]", host_name, backup='')
     sed('/home/ubuntu/learning/learning/settings.py',
         "\[SERVER_NAME\]", host_name, backup='')
-    sed('/home/ubuntu/learning/learning/settings-production.py',
-        "\[DB_HOST_NAME\]", db_host_name, backup='')
-    sed('/home/ubuntu/learning/learning/settings.py',
-        "\[DB_HOST_NAME\]", db_host_name, backup='')
+
+    sed('/home/ubuntu/learning/config.py', "\[DB_HOST_NAME\]", db_host_name, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DB_HOST_NAME\]", db_host_name, backup='')
+
+@task
+def create_base_folders():
     run('mkdir -p /home/ubuntu/learning/log')
     run('mkdir -p /home/ubuntu/learning/uploads')
     run('mkdir -p /home/ubuntu/learning/media/uploads')
