@@ -18,9 +18,34 @@ if 'domain_name' in env:
     domain_name = env.domain_name
     host_name = domain_name
 
+# Dynamic values 
+PRODUCT_NAME = "Learning App"
+# Emai Settings 
+MANDRILL_API_KEY = "S7LYcVWRNKR70qgReZDXPw"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = "insmartapps.in@gmail.com"
+EMAIL_HOST_PASSWORD = "insmartapps@vol"
+EMAIL_PORT = "587"
+# Server Name
+SERVER_NAME = host_name
+DEFAULT_HOST = host_name
+DEFAULT_PORT = "8000"
+# MY-SQL config 
+DB_USER_NAME = "admin"
+DB_USER_PASS = "admin@123#"
+DB_NAME = "learndb"
+DB_HOST = db_host_name
+DB_PORT = "3306"
+
+
+@task
+def check_domain():
+    print domain_name
+
 # Check Server and Set DB Connection
 if host_name == 'insmartapps.com':
     db_host_name = 'localhost'
+    DEFAULT_PORT = "443"
 else:
     db_host_name = "localhost"
 
@@ -96,9 +121,20 @@ def set_config_values():
         "\[SERVER_NAME\]", host_name, backup='')
     sed('/home/ubuntu/learning/learning/settings.py',
         "\[SERVER_NAME\]", host_name, backup='')
-
-    sed('/home/ubuntu/learning/config.py', "\[DB_HOST_NAME\]", db_host_name, backup='')
-    sed('/home/ubuntu/learning/config.py', "\[DB_HOST_NAME\]", db_host_name, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[SERVER_NAME\]", SERVER_NAME, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DB_USER_NAME\]", DB_USER_NAME, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DB_USER_PASS\]", DB_USER_PASS, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DB_NAME\]", DB_NAME, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DB_HOST\]", DB_HOST, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DB_PORT\]", DB_PORT, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[PRODUCT_NAME\]", PRODUCT_NAME, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DEFAULT_HOST\]", DEFAULT_HOST, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[DEFAULT_PORT\]", DEFAULT_PORT, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[MANDRILL_API_KEY\]", MANDRILL_API_KEY, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[EMAIL_HOST\]", EMAIL_HOST, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[EMAIL_HOST_USER\]", EMAIL_HOST_USER, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[EMAIL_HOST_PASSWORD\]", EMAIL_HOST_PASSWORD, backup='')
+    sed('/home/ubuntu/learning/config.py', "\[EMAIL_PORT\]", EMAIL_PORT, backup='')
 
 @task
 def create_base_folders():
@@ -106,6 +142,9 @@ def create_base_folders():
     run('mkdir -p /home/ubuntu/learning/uploads')
     run('mkdir -p /home/ubuntu/learning/media/uploads')
     run('mkdir -p /home/ubuntu/media/uploads')
+
+@task
+def install_requirements():
     run('/home/ubuntu/env/bin/pip install -r /home/ubuntu/learning/requirements.txt')
 
 # collect all static files
@@ -164,7 +203,10 @@ def setup():
 # for daily deploy
 @task
 def deploy():
+    execute(create_base_folders)
     execute(cp)
+    execute(set_config_values)
+    execute(install_requirements)
     execute(dbsync)
     execute(static)
 
@@ -177,6 +219,3 @@ def clean_deploy():
     execute(create_super_user)
     execute(force_restart)
 
-@task
-def check_domain():
-    print domain_name

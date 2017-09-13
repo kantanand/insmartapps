@@ -10,8 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/dev/ref/settings/
 """
 
-import os
-
+from config import *
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -233,7 +232,7 @@ MANDRILL_API_KEY = os.environ.get("MANDRILL_API_KEY","S7LYcVWRNKR70qgReZDXPw")
 EMAIL_HOST = os.environ.get('EMAIL_HOST','smtp.gmail.com')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER','insmartapps.in@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD','insmartapps@vol')
-EMAIL_PORT = os.environ.get('EMAIL_PORT', 587)
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
 EMAIL_USE_TLS = True
 
 ## GLOBAL CONSTANTS ##
